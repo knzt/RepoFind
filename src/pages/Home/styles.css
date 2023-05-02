@@ -1,11 +1,11 @@
 :root {
     --border-color: #999999;
     --back-color: #1d1e20;
+    --git-blue: #539bf5;
 }
 
 .content {
     position: relative;
-
     display: flex;
     align-items: flex-start;
     justify-content: flex-end;
@@ -17,6 +17,7 @@
     position: absolute;
     left: 0;
     opacity: 0.3;
+    z-index: -1;
 }
 
 .info {
@@ -32,11 +33,13 @@ input {
     padding: .5rem;
     min-width: 60%;
     margin-right: 1rem;
+    outline: none;
+    color: white;
 }
 
 button {
     position: relative;
-    border: 1px solid rgba(49, 241, 255, 0.5);
+    border: 1px solid var(--git-blue);
     border-radius: 22px;
     background: transparent;
     color: white;
@@ -46,10 +49,15 @@ button {
     margin-right: 1rem;
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     overflow: hidden;
-
+    cursor: pointer;
 }
 
-  span {
+button:active {
+  opacity: 0.8;
+}
+
+
+  button>span {
     position: absolute;
     border-radius: 100vmax;
   }
@@ -118,3 +126,101 @@ button {
       opacity: 0;
     }
   }
+
+
+.user-profile {
+    display: flex;
+    margin: 1.5rem 0;
+}
+
+.profile {
+    border-radius: 50%;
+    width: 5rem;
+    height: 5rem;
+    border: 1px solid var(--border-color);
+    margin-right: 2rem;
+}
+
+.user-profile {
+    color: var(--border-color);
+}
+
+.user-profile h3 {
+    font-size: 1.7rem;
+    margin: 0;
+}
+
+.user-profile span {
+    display: block;
+    font-size: 1.1rem;
+    margin: 0;
+    color: var(--border-color);
+}
+
+.user-profile p {
+    font-size: 1.2rem;
+    margin: 0;
+}
+
+.repositories {
+  font-size: 32px;
+  color: white;
+  margin: 12px 0;
+  text-align: center;
+}
+
+.user-profile a {
+    text-decoration: none;
+}
+
+.repo {
+  width: 89%;
+  height: fit-content;
+}
+
+
+@media (max-width: 768px) {
+
+  .content {
+    align-items: center;
+    justify-content: center;
+  }
+
+  .content p {
+    text-align: justify;
+  }
+
+  .info {
+    width: 90%;
+    margin: 0;
+  }
+
+  .user-profile {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+  }
+
+  .profile {
+      margin: 0;
+  }
+
+  .repo {
+    width: auto;
+  }
+
+  /* input {
+    flex-grow: 2;
+  } */
+
+  button {
+    width: 30%;
+    margin-right: 0;
+  }
+
+  .background {
+    top: 0;
+  }
+
+}

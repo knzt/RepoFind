@@ -1,11 +1,11 @@
 import { useState } from 'react';
 
-import { Header } from '../../components/Header';
+import { Header } from '../../components/Header/Header';
 
 import github from '../../assets/github.png';
 
-import './styles.css';
-import ItemList from '../../components/ItemList';
+import './app.css';
+import ItemList from '../../components/Repository/Repository';
 function App() {
 
   const [user, setUser] = useState('');
@@ -18,8 +18,8 @@ function App() {
     const newUser = await userData.json();
 
     if(newUser.name) {
-      const {avatar_url, name, bio, login, html_url} = newUser;
-      setCurrentUser({avatar_url, name, bio, login, html_url});
+      const {avatar_url, name, bio, login, html_url, public_repos} = newUser;
+      setCurrentUser({avatar_url, name, bio, login, html_url, public_repos});
 
       const reposData = await fetch(`https://api.github.com/users/${user}/repos`);
 
@@ -29,6 +29,12 @@ function App() {
         setRepos(newRepos);
       }
     }
+
+    handleOnClear();
+  }
+
+  const handleOnClear = () => {
+    setUser('');
   }
 
 
@@ -42,6 +48,7 @@ function App() {
         <div className='info'>
           <div>
             <input
+              type="text"
               name='user'
               value={user}
               placeholder='@username'
@@ -62,17 +69,24 @@ function App() {
             <img src={currentUser.avatar_url} alt="foto de perfil fo usuário no github" className='profile'/>
             <div>
               <h3>{currentUser.name}</h3>
-              <a href={currentUser.html_url} target='blank'><span>@{currentUser.login}</span></a>
+              <a href={currentUser.html_url} target='blank' title='abrir no github'><span>@{currentUser.login}</span></a>
               <p>{currentUser.bio}</p>
             </div>
           </div>
           </>
-          ) : null}
+          ) : (
+                <p id='tutorial'>Digite o nome de usuário (github) no campo indicado<br/>
+                ➥ clique em buscar<br/>
+                ➥ clique no @ do usuário para acessar o perfil no GitHub<br/>
+                ➥ clique no nome do repositório para acessar o repositório no GitHub
+                 </p>
+                )
+          }
 
           {repos?.length > 0 ? (
 
           <div className='repo'>
-            <h4 className='repositories'>Repositórios</h4>
+            <h4 className='repositories'>Repositórios ({currentUser.public_repos})</h4>
             <hr/>
             {repos.map(repo => (
               <ItemList

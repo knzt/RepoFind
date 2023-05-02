@@ -1,10 +1,12 @@
 import React from 'react'
-import './styles.css'
+import './repository.css'
 
 function ItemList({title, description, link}) {
   return (
     <div className='item-list'>
-        <a href={link} target='blank'>
+        <a href={link}
+        target='blank'
+        title='abrir no github'>
             <strong>{title}</strong>
         </a>
         <p>{description}</p>

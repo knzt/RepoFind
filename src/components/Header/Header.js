@@ -1,8 +1,8 @@
-import './styles.css';
+import './header.css';
 const Header = () => {
   return (
     <header>
-        <h1>GitFind</h1>
+        <h1>RepoFind</h1>
 
     </header>
   );
